@@ -1,24 +1,48 @@
 <h1><%= @question.title %></h1>
+
 <div>
   <p><%= @question.body %></p>
   <span> @question.vote.values.sum (fix this later) </span>
-  <span>< @question.author.username (fix)</span>
+  <span><%= @question.author.username %></span>
   <span><%= @question.created_at %></span>
 </div>
+
 <div>
-  <% @question.comments.each do |comment|
+  <h2>Answers:</h2>
   <ul>
-    <li> comment.content </li>
-
-
+    <% @question.answers.each do |answer| %>
+    <li>
+      <%= answer.description %><br>
+      <span>answer.votes.value.sum(fix)</span>
+      <span><%= answer.answerer.username %></span>
+      <span><%= answer.created_at %></span>
+      </li>
   </ul>
+      <p>
+        <h3>Comments for answer:</h3>
+        <ul>
+          <% answer.comments.each do |comment| %>
+          <li><%= comment.content %></li>
+          <span><%= comment.commenter.username %></span>
+          <span><%= comment.created_at %></span>
+        </ul>
+        <% end %>
+        <% end %>
+      </p>
 </div>
-<ul>
-  <%= @question.answers.each do |answer| %>
-  <li>
-    <%= answer.description %>
-    <span>answer.votes.value.sum(fix)</span>
-    <span>answer.answerer_id (fix)</span>
-    <span> answer.created_at (fix)</span>
-  </li>
-</ul>
+
+<h4>Comments for questions:</h4>
+<div>
+  <% @question.comments.each do |comment| %>
+  <ul>
+    <li>
+      <%= comment.content %><br>
+      <span> comment.votes.values.sum (fix later)</span>
+      <span><%= comment.commenter.username %></span>
+      <span><%= comment.created_at %></span>
+    </li>
+  </ul>
+  <% end %>
+</div>
+
+
