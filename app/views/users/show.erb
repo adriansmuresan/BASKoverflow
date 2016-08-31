@@ -1,4 +1,43 @@
+<% if @total_votes > 0 %>
+  <div id = "good-user">
+<% elsif @total_votes == 0 %>
+  <div id = "neutral-user">
+<% else %>
+  <div id = "bad-user">
+<% end %>
 <h1> Welcome to <%= @user.username.capitalize %>'s Profile  </h1>
+<h2> Reputation: <%= @total_votes %></h2>
+<h2>Questions</h2>
+<ul>
+<% if @questions %>
+<% @questions.each do |question| %>
+<li><a href="/questions/<%= question.id %>"> <%= question.title %> </a></li>
+<% end %>
+<% end %>
+</ul>
+<h2>Answers</h2>
+<ul>
+<% if @answers %>
+<% @answers.each do |answer| %>
+<li><%= answer.description %></li>
 
+<a href="/questions/<%= answer.question.id %>"> <%= answer.question.title %> </a>
+<% end %>
+<% end %>
+</ul>
 
+<h2>Comments</h2>
+<ul>
+<% if @comments %>
+<% @comments.each do |comment| %>
+<li><%= comment.content %></li>
 
+<% if comment.commentable_type == 'Question' %>
+ <a href="/questions/<%=comment.commentable.id%>"> <%= comment.commentable.title %> </a>
+<% else %>
+  <a href="/questions/<%=comment.commentable.question.id%>"> <%= comment.commentable.question.title %> </a>
+<% end %>
+<% end %>
+<% end %>
+</ul>
+</div>

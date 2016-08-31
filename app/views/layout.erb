@@ -23,7 +23,7 @@
       <ul>
           <li><a href="/questions">HOME</a></li>
         <% if logged_in? %>
-          <li><a href="/users/#{current_user.id}"> <%= current_user.username.capitalize %>'s Profile</a></li>
+          <li><a href="/users/<%= current_user.id %>"> <%= current_user.username.capitalize %>'s Profile</a></li>
           <li><a href="/users/logout">Logout</a></li>
         <% else %>
           <li><a href="/users/login">Login</a></li>
