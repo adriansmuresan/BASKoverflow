@@ -1,10 +1,14 @@
 <h1> WELCOME TO GAMEOVERFLOW !!! </h1>
 <% @questions.each do |question| %>
 <ul>
-  <li>
+  <li> <% if logged_in? %>
+    <form action='/questions/<%= question.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
+    </form>
+    <form action='/questions/<%= question.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
+      <% end %>
+
     <a href="/questions/<%= question.id %>"><%= question.title %></a><br>
-    <form></form>
-    <span>question.votes.value.sum (fix votes)</span>
+    <span><%= question.vote_total%></span>
     <span><%= question.author.username %></span>
     <span><%= question.created_at %></span>
   </li>
