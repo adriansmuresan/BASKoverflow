@@ -1,4 +1,5 @@
 <h1><%= @question.title %></h1>
+
 <div>
   <p><%= @question.body %></p>
   <span> @question.vote.values.sum (fix this later) </span>
@@ -16,16 +17,16 @@
       <span><%= answer.answerer.username %></span>
       <span><%= answer.created_at %></span>
       </li>
-    <% end %>
   </ul>
       <p>
-        <h3>Comments for questions:</h3>
+        <h3>Comments for answer:</h3>
         <ul>
-          <% @question.comments.each do |comment| %>
+          <% answer.comments.each do |comment| %>
           <li><%= comment.content %></li>
           <span><%= comment.commenter.username %></span>
           <span><%= comment.created_at %></span>
         </ul>
+        <% end %>
         <% end %>
       </p>
 </div>
