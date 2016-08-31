@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :questions
-  has_many :answers
-  has_many :comments, as: :commentable
-  has_many :votes, as: :votable
+  has_many :questions, foreign_key: :author_id
+  has_many :answers, foreign_key: :answerer_id
+  has_many :comments, foreign_key: :commenter_id
+  has_many :votes, foreign_key: :voter_id
 
   def password
     @password ||= BCrypt::Password.new(hashed_password)
@@ -16,6 +16,20 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password)
     user = User.find_by(email: email)
     user != nil ? user.password == password : false
+  end
+
+  def total_votes
+    total = 0
+    self.questions.each do |question|
+      total += question.votes.sum(:value)
+    end
+    self.answers.each do |answer|
+      total += answer.votes.sum(:value)
+    end
+    self.comments.each do |comment|
+      total += comment.votes.sum(:value)
+    end
+    total
   end
 
 end
