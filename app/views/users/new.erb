@@ -1,0 +1,19 @@
+<h1> Register </h1>
+<% if @errors %>
+  <ul class="alert">
+  <% @errors.each do |error| %>
+  <li><%= error %></li>
+  <% end %>
+</ul>
+<% end %>
+<div class="form-group">
+<form method="post" action="/users">
+    <label>Username:</label>
+    <input type="text" name="user[username]" placeholder="username"></br>
+    <label>Email:</label>
+    <input type="email" name="user[email]" placeholder="email"></br>
+    <label>Password:</label>
+    <input type="password" name="user[password]" placeholder="password"></br>
+    <input type="submit" value="Register">
+</form>
+</div>
