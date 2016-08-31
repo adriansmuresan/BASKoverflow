@@ -6,7 +6,7 @@
   <span><%= @question.author.username %></span>
   <span><%= @question.created_at %></span>
 </div>
-
+<%= erb :"/answers/_new", :layout => false %>
 <div>
   <h2>Answers:</h2>
   <ul>

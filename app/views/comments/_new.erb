@@ -1,0 +1,11 @@
+<% if logged_in? %>
+<div>
+  <form method="POST" action="/comments"> (fix route)
+    Content: <input type="text" name="content" placeholder="Content"><br><br>
+    <input type="submit" value="Post Comment">
+  </form>
+</div>
+<% end %>
+
+
+<%= erb :"/comments/_new", :layout => false %> (put this where you want to commment)

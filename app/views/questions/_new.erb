@@ -1,0 +1,9 @@
+<% if logged_in? %>
+<div>
+  <form method="POST" action="/questions">
+    Title: <input type="text" name="new_question[title]" placeholder="Title"><br><br>
+    Content: <input type="text" name="new_question[body]" placeholder="Content"><br><br>
+    <input type="submit" value="Post Question">
+  </form>
+</div>
+<% end %>

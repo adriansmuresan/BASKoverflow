@@ -1,4 +1,15 @@
+<% if @errors %>
+  <ul>
+  <% @errors.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
+
 <h1> WELCOME TO GAMEOVERFLOW !!! </h1>
+
+<%= erb :"/questions/_new", :layout => false %>
+
 <% @questions.each do |question| %>
 <ul>
   <li>
