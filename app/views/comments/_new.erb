@@ -1,6 +1,6 @@
 <% if logged_in? %>
 <div>
-  <form method="POST" action="/comments"> (fix route)
+  <form method="POST" action=<%= path %>>
     Content: <input type="text" name="content" placeholder="Content"><br><br>
     <input type="submit" value="Post Comment">
   </form>
@@ -8,4 +8,3 @@
 <% end %>
 
 
-<%= erb :"/comments/_new", :layout => false %> (put this where you want to commment)
