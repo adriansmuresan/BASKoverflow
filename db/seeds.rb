@@ -16,7 +16,7 @@ end
 
 # 20.times do
 #   Vote.create({
-#       value: rand(-1..1)
+#       value: 0,
 #       votable_id: rand(1..20)
 
 #     })
