@@ -4,7 +4,7 @@
   <li>
     <a href="/questions/<%= question.id %>"><%= question.title %></a><br>
     <form></form>
-    <span>question.votes.value.sum (fix votes)</span>
+    <span><%= question.vote_sum %></span>
     <span><%= question.author.username %></span>
     <span><%= question.created_at %></span>
   </li>

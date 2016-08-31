@@ -14,13 +14,32 @@ end
     })
 end
 
-# 20.times do
-#   Vote.create({
-#       value: 0,
-#       votable_id: rand(1..20)
+200.times do
+  Vote.create({
+      value: rand(-1..1),
+      votable_id: rand(1..20),
+      votable_type: 'Question',
+      votable_id: rand(1..10)
+    })
+end
 
-#     })
-# end
+200.times do
+  Vote.create({
+      value: rand(-1..1),
+      votable_id: rand(1..100),
+      votable_type: 'Answer',
+      votable_id: rand(1..10)
+    })
+end
+
+200.times do
+  Vote.create({
+      value: rand(-1..1),
+      votable_id: rand(1..400),
+      votable_type: 'Comment',
+      votable_id: rand(1..10)
+    })
+end
 
 10.times do
   User.create({
