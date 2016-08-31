@@ -1,8 +1,18 @@
 <h1><%= @question.title %></h1>
-<p><%= @question.body %></p>
-<span> @question.vote.values.sum (fix this later) </span>
-<span>< @question.author.username (fix)</span>
-<span><%= @question.created_at %></span>
+<div>
+  <p><%= @question.body %></p>
+  <span> @question.vote.values.sum (fix this later) </span>
+  <span>< @question.author.username (fix)</span>
+  <span><%= @question.created_at %></span>
+</div>
+<div>
+  <% @question.comments.each do |comment|
+  <ul>
+    <li> comment.content </li>
+
+
+  </ul>
+</div>
 <ul>
   <%= @question.answers.each do |answer| %>
   <li>
