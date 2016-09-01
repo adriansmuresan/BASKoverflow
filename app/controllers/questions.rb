@@ -50,6 +50,7 @@ else
   redirect back
 end
 end
+end
 
 get '/questions/:id/edit' do
   @question = Question.find(params[:id])
