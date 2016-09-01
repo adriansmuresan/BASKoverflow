@@ -1,4 +1,4 @@
-post '/question/:id/answers' do
+post '/questions/:id/answers' do
  if logged_in?
     new_answer = Answer.new(description: params[:description])
     new_answer.answerer_id = session[:user_id]
@@ -15,28 +15,47 @@ post '/question/:id/answers' do
   end
 end
 
+get '/answers/:id/edit' do
+  @answer = Answer.find(params[:id])
+  erb :'/answers/edit'
+end
+
+put '/answers/:id' do
+  if logged_in?
+      update_answer = Answer.find(params[:id]).update_attribute
+    if update_answer
+      redirect back
+    else
+      @errors = ["Make sure you fill in all fields"]
+      erb :'/questions/show'
+    end
+  else
+    redirect :'/'
+  end
+end
+
 post '/answers/:id/votes' do
   old_vote = Vote.find_by(voter_id: current_user.id, votable_id: params[:id], votable_type: "Answer")
   answer = Answer.find(params[:id])
 
-if request.xhr?
-  new_val = request.params['value']
-  if old_vote && old_vote.value == new_val
-  elsif old_vote
-    old_vote.value = new_val
-    old_vote.save
+  if request.xhr?
+    new_val = request.params['value']
+    if old_vote && old_vote.value == new_val
+    elsif old_vote
+      old_vote.value = new_val
+      old_vote.save
+    else
+    vote = Vote.create(value: new_val, votable_id: answer.id, votable_type: 'Answer', voter_id: current_user.id)
+    end
+    answer.vote_total.to_s
   else
-  vote = Vote.create(value: new_val, votable_id: answer.id, votable_type: 'Answer', voter_id: current_user.id)
+    if params[:upvote]
+      vote= Vote.create(value: 1, votable_id: params[:id], votable_type: 'Answer', voter_id: current_user.id)
+    else
+      vote= Vote.create(value: -1, votable_id: params[:id], votable_type: 'Answer', voter_id: current_user.id)
+    end
+      redirect back
   end
-  answer.vote_total.to_s
-else
-  if params[:upvote]
-    vote= Vote.create(value: 1, votable_id: params[:id], votable_type: 'Answer', voter_id: current_user.id)
-  else
-    vote= Vote.create(value: -1, votable_id: params[:id], votable_type: 'Answer', voter_id: current_user.id)
-  end
-    redirect back
-end
 end
 
 
