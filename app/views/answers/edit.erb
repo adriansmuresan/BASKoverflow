@@ -1,0 +1,6 @@
+ <form method="POST" action="/answers/<%= @answer.id %>">
+    <input type="hidden" name="_method" value="PUT">
+    Description: <input type="text" name="description" value="<%= @answer.description %>" ><br><br>
+    <input type="submit" value="Save Answer">
+  </form>
+
