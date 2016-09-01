@@ -27,6 +27,7 @@ end
 
 
 post '/questions/:id/votes' do
+if logged_in?
   old_vote = Vote.find_by(voter_id: current_user.id, votable_id: params[:id], votable_type: "Question")
   question = Question.find(params[:id])
 
@@ -49,6 +50,7 @@ else
     redirect back
 end
 end
+end
 
 get '/questions/:id/edit' do
   @question = Question.find(params[:id])
@@ -68,6 +70,7 @@ put '/questions/:id' do
     redirect :'/'
   end
 end
+
 
 delete '/questions/:id' do
      Question.find(params[:id]).destroy

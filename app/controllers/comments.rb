@@ -1,7 +1,7 @@
 
 post '/questions/:id/comments' do
   if logged_in?
-    @comment = Comment.new({content: params[:content],commentable_id: params[:id], commentable_type: 'Question', commenter_id: session[:user_id]})
+    @comment = Comment.new({content: params[:content], commentable_id: params[:id], commentable_type: 'Question', commenter_id: session[:user_id]})
     if @comment.save
       redirect back
     else
@@ -13,7 +13,7 @@ end
 
 post '/answers/:answer_id/comments' do
   if logged_in?
-    @comment = Comment.new({content: params[:content],commentable_id: params[:answer_id], commentable_type: 'Answer', commenter_id: session[:user_id]})
+    @comment = Comment.new({content: params[:content], commentable_id: params[:answer_id], commentable_type: 'Answer', commenter_id: session[:user_id]})
     if @comment.save
       redirect back
     else
@@ -24,6 +24,7 @@ post '/answers/:answer_id/comments' do
 end
 
 post '/comments/:id/votes' do
+if logged_in?
   old_vote = Vote.find_by(voter_id: current_user.id, votable_id: params[:id], votable_type: "Comment")
   comment = Comment.find(params[:id])
 
@@ -47,4 +48,5 @@ post '/comments/:id/votes' do
     end
       redirect back
   end
+end
 end

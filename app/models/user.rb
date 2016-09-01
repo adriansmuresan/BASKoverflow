@@ -4,11 +4,16 @@ class User < ActiveRecord::Base
   has_many :comments, foreign_key: :commenter_id
   has_many :votes, foreign_key: :voter_id
 
+  validates_presence_of :username, :email
+  validates_uniqueness_of :username, :email
+  validate :password_length_check
+
   def password
     @password ||= BCrypt::Password.new(hashed_password)
   end
 
   def password=(new_password)
+    @plaintext_pass = new_password
     @password = BCrypt::Password.create(new_password)
     self.hashed_password = @password
   end
@@ -30,6 +35,12 @@ class User < ActiveRecord::Base
       total += comment.votes.sum(:value)
     end
     total
+  end
+
+  def password_length_check
+    if @plaintext_pass.length < 8
+      errors.add(:password, "must be at least 8 characters")
+    end
   end
 
 end

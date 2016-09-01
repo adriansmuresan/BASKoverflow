@@ -4,6 +4,7 @@
   <div id = "neutral-user">
 <% else %>
   <div id = "bad-user">
+    Bad User - Don't Trust <img src='http://emojipedia-us.s3.amazonaws.com/cache/8c/65/8c65e5de808ec301754508366480250c.png'>
 <% end %>
 <h1> Welcome to <%= @user.username.capitalize %>'s Profile  </h1>
 <h2> Reputation: <%= @total_votes %></h2>
