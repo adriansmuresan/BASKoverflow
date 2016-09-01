@@ -47,7 +47,7 @@ else
   else
     vote= Vote.create(value: -1, votable_id: params[:id], votable_type: 'Question', voter_id: current_user.id)
   end
-    redirect back
+  redirect back
 end
 end
 end

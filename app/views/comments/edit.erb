@@ -1,0 +1,5 @@
+<form method="POST" action="/questions/<%= @question.id %>/comments/<%= @comment.id %>">
+    <input type="hidden" name="_method" value="PUT">
+    Description: <input type="text" name="content" value="<%= @comment.content %>" ><br><br>
+    <input type="submit" value="Save Comment">
+  </form>
