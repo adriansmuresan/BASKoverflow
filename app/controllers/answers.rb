@@ -1,4 +1,4 @@
-post '/Answer/:id/answers' do
+post '/questions/:id/answers' do
  if logged_in?
     new_answer = Answer.new(description: params[:description])
     new_answer.answerer_id = session[:user_id]
