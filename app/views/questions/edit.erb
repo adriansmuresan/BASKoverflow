@@ -1,0 +1,6 @@
+ <form method="POST" action="/questions/<%= @question.id %>">
+    <input type="hidden" name="_method" value="PUT">
+    Title: <input type="text" name="edit_question[title]" value="<%= @question.title %>" ><br><br>
+    Content: <input type="text" name="edit_question[body]" value="<%= @question.body %>" ><br><br>
+    <input type="submit" value="Save Question">
+  </form>

@@ -1,5 +1,12 @@
 <h1><%= @question.title %></h1>
 
+<% if @errors %>
+<ul>
+  <% @errors.each do |error| %>
+  <li><%= error %></li>
+  <% end %>
+</ul>
+<% end %>
 
 <div class='question'>
   <h2>Question:</h2>
@@ -13,6 +20,17 @@
   </p>
 <%= erb :"/answers/_new", :layout => false %>
 
+  <div>
+    <% if logged_in? %>
+      <div>
+        <a href="/questions/<%= @question.id %>/edit">Edit</a>
+        <form method="POST" action="/questions/<%= @question.id %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Delete">
+        </form>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <div class='question_comments'>
@@ -48,7 +66,7 @@
       <span><%= answer.answerer.username %></span>
       <span><%= answer.created_at %></span>
     </p>
-    <% path = "/questions/#{@question.id}/answers/#{ answer.id }/comments" %>
+    <% path = "/answers/#{ answer.id }/comments" %>
     <%= erb :"/comments/_new", layout: false, locals: { path: path } %>
 
     <h4>Comments for this  answer <%= answer.id %>:</h4>

@@ -36,5 +36,27 @@ end
   redirect back
 end
 
+get '/questions/:id/edit' do
+  @question = Question.find(params[:id])
+  erb :'/questions/edit'
+end
 
+put '/questions/:id' do
+  if logged_in?
+    update_question = Question.find(params[:id]).update_attributes(params[:edit_question])
+    if update_question
+      redirect :"/questions/#{params[:id]}"
+    else
+      @errors = ["Make sure you fill in all fields"]
+      erb :'/questions/show'
+    end
+  else
+    redirect :'/'
+  end
+end
+
+delete '/questions/:id' do
+     Question.find(params[:id]).destroy
+     redirect '/'
+end
 
