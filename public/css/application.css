@@ -1,3 +1,7 @@
+.alert {
+  color: red;
+}
+
 .green {
   background-color: green;
   color: white;
@@ -9,9 +13,34 @@
 }
 
 #bad-user {
+  border: solid 100px transparent;
+  border-image: url('http://rlv.zcache.com.au/gaudy_bright_rainbow_elephant_pattern_square_sticker-r763e5af047d1438dbeebdca0795a31b8_v9wf3_8byvr_324.jpg') 25% repeat;
+  cursor: no-drop;
   background-color:  #996600;
   color: white;
 }
+
+#gameover {
+  font-size: 100px;
+  color: red;
+  position:relative;
+  animation:mymove 3s ease-out forwards;
+  animation-iteration-count: 2;
+  -webkit-animation:mymove 3s;
+  -webkit-animation-iteration-count:3;
+}
+
+  @keyframes mymove
+  { from {top:0px;}
+  to {top:400px;}
+  }
+
+  @-webkit-keyframes mymove
+  {
+  from {top:0px;}
+  to {top:400px;}
+  }
+
 #good-user {
   background-color: #e6ffe6;
   height: 750px;

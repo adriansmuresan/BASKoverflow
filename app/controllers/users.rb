@@ -21,10 +21,16 @@ erb :"users/login"
 end
 
 post '/users/login' do
-  if user = User.find_by(params[:email])
+  if user = User.find_by(email: params[:email])
     if user.authenticate?(params[:email], params[:password])
-      session[:user_id] = user.id
-      redirect "/users/#{user.id}"
+      if user.total_votes < -10
+        user.destroy
+        session.clear
+        redirect '/questions?gameover=yo'
+      else
+        session[:user_id] = user.id
+        redirect "/users/#{user.id}"
+      end
     else
       @errors = user.errors.full_messages
       erb :"users/login"

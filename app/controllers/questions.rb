@@ -1,5 +1,6 @@
 get '/questions' do
   @questions = Question.all
+  @gameover = params[:gameover]
   erb :'/questions/index'
 end
 

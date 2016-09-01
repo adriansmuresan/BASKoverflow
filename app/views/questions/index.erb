@@ -6,6 +6,11 @@
   </ul>
 <% end %>
 
+<% if @gameover %>
+<div class="alert">Your Account has Been Deleted</div>
+<div id='gameover'>GAME OVER</div>
+<% end %>
+
 <h1> WELCOME TO GAMEOVER YO !!! </h1>
 
 <%= erb :"/questions/_new", :layout => false %>
