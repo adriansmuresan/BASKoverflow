@@ -61,6 +61,7 @@ if logged_in?
 end
 end
 
+
 delete '/answers/:id' do
   Answer.find(params[:id]).destroy
   redirect back
