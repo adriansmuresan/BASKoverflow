@@ -12,13 +12,21 @@ end
 
 
 post '/questions/:id/votes' do
-
-if params[:upvote]
-  vote= Vote.create(value: 1, votable_id: params[:id], votable_type: 'Question', voter_id: current_user.id)
+if request.xhr?
+  p "value================================================"
+  question = Question.find(params[:id])
+  new_val = request.params['value']
+  vote = Vote.create(value: new_val, votable_id: question.id, votable_type: 'Question', voter_id: current_user.id)
+  question.vote_total.to_s
 else
-  vote= Vote.create(value: -1, votable_id: params[:id], votable_type: 'Question', voter_id: current_user.id)
+  if params[:upvote]
+    vote= Vote.create(value: 1, votable_id: params[:id], votable_type: 'Question', voter_id: current_user.id)
+  else
+    vote= Vote.create(value: -1, votable_id: params[:id], votable_type: 'Question', voter_id: current_user.id)
+  end
+    p back
+    redirect back
 end
-  redirect back
 end
 
 
