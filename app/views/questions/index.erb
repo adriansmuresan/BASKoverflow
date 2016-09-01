@@ -1,4 +1,15 @@
-<h1> WELCOME TO GAMEOVERFLOW !!! </h1>
+<% if @errors %>
+  <ul>
+  <% @errors.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<h1> WELCOME TO GAMEOVER YO !!! </h1>
+
+<%= erb :"/questions/_new", :layout => false %>
+
 <% @questions.each do |question| %>
 <ul>
   <li> <% if logged_in? %>
@@ -8,6 +19,7 @@
       <% end %>
 
     <a href="/questions/<%= question.id %>"><%= question.title %></a><br>
+
     <span><%= question.vote_total%></span>
     <span><%= question.author.username %></span>
     <span><%= question.created_at %></span>
