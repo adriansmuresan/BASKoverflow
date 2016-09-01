@@ -10,11 +10,8 @@
 <div class="alert">Your Account has Been Deleted</div>
 <div id='gameover'>GAME OVER</div>
 <% end %>
-
-<h1> WELCOME TO GAMEOVER YO !!! </h1>
-
 <%= erb :"/questions/_new", :layout => false %>
-<div>
+<div id="text-container">
 <% @questions.each do |question| %>
 <ul>
   <li> <% if logged_in? %>
