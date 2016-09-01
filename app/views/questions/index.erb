@@ -9,7 +9,7 @@
 <h1> WELCOME TO GAMEOVER YO !!! </h1>
 
 <%= erb :"/questions/_new", :layout => false %>
-
+<div>
 <% @questions.each do |question| %>
 <ul>
   <li> <% if logged_in? %>
@@ -26,3 +26,4 @@
   </li>
 </ul>
 <% end %>
+</div>

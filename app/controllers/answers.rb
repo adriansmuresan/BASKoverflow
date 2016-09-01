@@ -1,5 +1,5 @@
 post '/questions/:id/answers' do
- if logged_in?
+  if logged_in?
     new_answer = Answer.new(description: params[:description])
     new_answer.answerer_id = session[:user_id]
     new_answer.question_id = params[:id]
@@ -36,6 +36,7 @@ put '/answers/:id' do
 end
 
 post '/answers/:id/votes' do
+if logged_in?
   old_vote = Vote.find_by(voter_id: current_user.id, votable_id: params[:id], votable_type: "Answer")
   answer = Answer.find(params[:id])
 
@@ -57,6 +58,7 @@ post '/answers/:id/votes' do
     end
       redirect back
   end
+end
 end
 
 delete '/answers/:id' do

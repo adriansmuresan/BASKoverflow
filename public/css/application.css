@@ -7,3 +7,17 @@
   background-color: red;
   color: white;
 }
+
+#bad-user {
+  background-color:  #996600;
+  color: white;
+}
+#good-user {
+  background-color: #e6ffe6;
+  height: 750px;
+}
+
+#neutral-user {
+  background-color: lightgray;
+  height: 750px;
+}
