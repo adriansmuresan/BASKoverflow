@@ -1,6 +1,6 @@
 <% if logged_in? %>
 <div>
-  <form method="POST" action="/question/<%= @question.id %>/answers">
+  <form method="POST" action="/questions/<%= @question.id %>/answers">
     Answer: <input type="text" name="description" placeholder="Content"><br><br>
     <input type="submit" value="Post Answer">
   </form>

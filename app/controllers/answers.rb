@@ -22,9 +22,10 @@ end
 
 put '/answers/:id' do
   if logged_in?
-      update_answer = Answer.find(params[:id]).update_attribute
+    answer = Answer.find(params[:id])
+    update_answer = answer.update(description: params[:description])
     if update_answer
-      redirect back
+      redirect :"/questions/#{answer.question_id}"
     else
       @errors = ["Make sure you fill in all fields"]
       erb :'/questions/show'
@@ -56,6 +57,11 @@ post '/answers/:id/votes' do
     end
       redirect back
   end
+end
+
+delete '/answers/:id' do
+  Answer.find(params[:id]).destroy
+  redirect back
 end
 
 
