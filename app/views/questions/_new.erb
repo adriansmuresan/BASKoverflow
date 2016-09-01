@@ -1,6 +1,7 @@
 <% if logged_in? %>
 <div>
   <form method="POST" action="/questions">
+    <h4>Post your question here:</h4>
     Title: <input type="text" name="new_question[title]" placeholder="Title" ><br><br>
     Content: <input type="text" name="new_question[body]" placeholder="Content" ><br><br>
     <input type="submit" value="Post Question">
