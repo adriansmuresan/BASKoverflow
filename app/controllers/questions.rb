@@ -27,13 +27,16 @@ end
 
 
 post '/questions/:id/votes' do
-
-if params[:upvote]
-  vote= Vote.create(value: 1, votable_id: params[:id], votable_type: 'Question', voter_id: current_user.id)
-else
-  vote= Vote.create(value: -1, votable_id: params[:id], votable_type: 'Question', voter_id: current_user.id)
-end
-  redirect back
+  if logged_in?
+    old_vote = Vote.find_by(voter_id: current_user.id, votable_id: params[:id], votable_type: "Question")
+    question = Question.find(params[:id])
+    if params[:upvote]
+      vote= Vote.create(value: 1, votable_id: params[:id], votable_type: 'Question', voter_id: current_user.id)
+    else
+      vote= Vote.create(value: -1, votable_id: params[:id], votable_type: 'Question', voter_id: current_user.id)
+    end
+      redirect back
+  end
 end
 
 get '/questions/:id/edit' do
@@ -54,6 +57,7 @@ put '/questions/:id' do
     redirect :'/'
   end
 end
+
 
 delete '/questions/:id' do
      Question.find(params[:id]).destroy

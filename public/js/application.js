@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('.upvote-button').on("click", function(event) {
+  $('div').on("click", ".upvote-button", function(event) {
   event.preventDefault();
    $this = $(this)
    url = $(this).parent().attr('action')
@@ -23,7 +23,7 @@ $(document).ready(function() {
 
   })
 
-  $('.downvote-button').on("click", function(event) {
+  $('div').on("click", '.downvote-button', function(event) {
   event.preventDefault();
     $this = $(this)
     url = $this.parent().attr('action')
