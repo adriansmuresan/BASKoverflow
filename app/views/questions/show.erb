@@ -45,6 +45,17 @@
         <span class="vote"><%= comment.vote_total %></span>
         <span><%= comment.commenter.username %></span>
         <span><%= comment.created_at %></span>
+
+        <div class='revise_comment'>
+          <% if logged_in? %>
+            <a href="/questions/<%= @question.id %>/comments/<%= comment.id %>/edit">Edit</a>
+            <form method="POST" action="/comments/<%= comment.id %>">
+              <input type="hidden" name="_method" value="DELETE">
+              <input type="submit" value="Delete">
+            </form>
+          <% end %>
+        </div>
+
       </li>
     </ul>
   <% end %>
@@ -90,6 +101,17 @@
             <span class="vote"><%= comment.vote_total %></span>
             <span><%= comment.commenter.username %></span>
             <span><%= comment.created_at %></span>
+
+            <div class='revise_comment'>
+              <% if logged_in? %>
+                <a href="/questions/<%= @question.id %>/comments/<%= comment.id %>/edit">Edit</a>
+                <form method="POST" action="/comments/<%= comment.id %>">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="submit" value="Delete">
+                </form>
+              <% end %>
+            </div>
+
         </li>
       </ul>
     <% end %>

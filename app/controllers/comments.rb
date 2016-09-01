@@ -50,3 +50,29 @@ if logged_in?
   end
 end
 end
+
+get '/questions/:id/comments/:comment_id/edit' do
+  @question = Question.find(params[:id])
+  @comment = Comment.find(params[:comment_id])
+  erb :'/comments/edit'
+end
+
+put '/questions/:id/comments/:comment_id' do
+if logged_in?
+  comment = Comment.find(params[:comment_id])
+  update_comment = comment.update(content: params[:content])
+    if update_comment
+      redirect "/questions/#{params[:id]}"
+    else
+      @errors = ["Make sure you fill in all fields"]
+      erb :'/questions/show'
+    end
+  else
+    redirect :'/'
+  end
+end
+
+delete '/comments/:id' do
+     Comment.find(params[:id]).destroy
+     redirect back
+end
