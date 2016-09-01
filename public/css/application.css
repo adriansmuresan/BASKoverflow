@@ -1,7 +1,9 @@
 .green {
-  color: green;
+  background-color: green;
+  color: white;
 }
 
 .red {
-  color: red;
+  background-color: red;
+  color: white;
 }

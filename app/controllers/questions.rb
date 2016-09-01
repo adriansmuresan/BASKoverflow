@@ -27,10 +27,18 @@ end
 
 
 post '/questions/:id/votes' do
-if request.xhr?
+  old_vote = Vote.find_by(voter_id: current_user.id, votable_id: params[:id], votable_type: "Question")
   question = Question.find(params[:id])
+
+if request.xhr?
   new_val = request.params['value']
+  if old_vote && old_vote.value == new_val
+  elsif old_vote
+    old_vote.value = new_val
+    old_vote.save
+  else
   vote = Vote.create(value: new_val, votable_id: question.id, votable_type: 'Question', voter_id: current_user.id)
+  end
   question.vote_total.to_s
 else
   if params[:upvote]

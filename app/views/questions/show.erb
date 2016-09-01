@@ -3,14 +3,14 @@
 
 <div class='question'>
   <h2>Question:</h2>
-  <p><%= @question.body %> <br>
+  <p><%= @question.body %></p>
     <form action='/questions/<%= @question.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
     </form>
     <form action='/questions/<%= @question.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
     <span class="vote"><%= @question.vote_total %></span>
     <span><%= @question.author.username %></span>
     <span><%= @question.created_at %></span>
-  </p>
+
 <%= erb :"/answers/_new", :layout => false %>
 
 </div>
@@ -19,35 +19,31 @@
   <h2>Question Comments:</h2>
   <% path = "/questions/#{@question.id}/comments" %>
   <%= erb :"/comments/_new", layout: false, locals: { path: path } %>
-  <ul>
+
 
   <% @question.comments.each do |comment| %>
-    <li><form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
-          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down">
-      <p>
+    <ul><li><form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
+          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
         <%= comment.content %><br>
-        <span><%= comment.vote_total %></span>
+        <span class="vote"><%= comment.vote_total %></span>
         <span><%= comment.commenter.username %></span>
         <span><%= comment.created_at %></span>
-      </p>
-    </li>
+    </li></ul>
   <% end %>
-  </ul>
+
 </div>
 
 
 <div class='answers'>
   <% @question.answers.each do |answer| %>
-    <p>
       <h3>Answer:<%= answer.id %></h3>
-      <%= answer.description %><br>
-      <form action='/answers/<%= answer.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
-    </form>
+      <p><%= answer.description %></p>
+    <ul><li><form action='/answers/<%= answer.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
     <form action='/answers/<%= answer.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
-      <span><%= answer.vote_total %></span>
+      <span class='vote'><%= answer.vote_total %></span>
       <span><%= answer.answerer.username %></span>
-      <span><%= answer.created_at %></span>
-    </p>
+      <span><%= answer.created_at %></span></li></ul>
+
     <% path = "/questions/#{@question.id}/answers/#{ answer.id }/comments" %>
     <%= erb :"/comments/_new", layout: false, locals: { path: path } %>
 
@@ -55,13 +51,13 @@
     <% answer.comments.each do |comment| %>
     <ul>
       <li>
-        <p><form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
+        <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
           <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
           <%= comment.content %> <br>
-          <span><%= comment.vote_total %></span>
+          <span class="vote"><%= comment.vote_total %></span>
           <span><%= comment.commenter.username %></span>
           <span><%= comment.created_at %></span>
-        </p>
+
       </li>
     </ul>
     <% end %>

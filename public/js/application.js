@@ -3,6 +3,7 @@ $(document).ready(function() {
   event.preventDefault();
    $this = $(this)
    url = $(this).parent().attr('action')
+   console.log(url)
 
    $.ajax({
      url: url,
@@ -11,7 +12,8 @@ $(document).ready(function() {
    })
    .done(function(response) {
       $this.parent().parent().find('.vote').text(response)
-      $('.downvote-button').removeClass('red')
+      console.log($this.parent().next().find('input'))
+      $this.parent().next().find('input').removeClass('red')
       $this.addClass('green')
    })
    .fail(function() {
@@ -25,6 +27,7 @@ $(document).ready(function() {
   event.preventDefault();
     $this = $(this)
     url = $this.parent().attr('action')
+    console.log(url)
 
     $.ajax({
       url: url,
@@ -33,8 +36,9 @@ $(document).ready(function() {
     })
 
    .done(function(response) {
+      console.log($this.parent().prev().find('input').first())
+      $this.parent().prev().find('input').first().removeClass('green')
       $this.parent().parent().find('.vote').text(response)
-      $('.upvote-button').removeClass('green')
       $this.addClass('red')
    })
    .fail(function() {
