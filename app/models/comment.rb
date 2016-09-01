@@ -3,11 +3,9 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
   has_many   :votes, as: :votable
 
-  def vote_sum
-    total_vote = 0
-    self.votes.each do |vote|
-      total_vote += vote.value
-    end
-    total_vote
+
+  def vote_total
+    self.votes.sum(:value)
   end
+
 end

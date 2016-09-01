@@ -1,13 +1,18 @@
 <h1><%= @question.title %></h1>
 
+
 <div class='question'>
   <h2>Question:</h2>
   <p><%= @question.body %> <br>
-    <span><%= @question.vote_sum %></span>
+    <form action='/questions/<%= @question.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
+    </form>
+    <form action='/questions/<%= @question.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
+    <span><%= @question.vote_total %></span>
     <span><%= @question.author.username %></span>
     <span><%= @question.created_at %></span>
   </p>
 <%= erb :"/answers/_new", :layout => false %>
+
 </div>
 
 <div class='question_comments'>
@@ -15,11 +20,13 @@
   <% path = "/questions/#{@question.id}/comments" %>
   <%= erb :"/comments/_new", layout: false, locals: { path: path } %>
   <ul>
+
   <% @question.comments.each do |comment| %>
-    <li>
+    <li><form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
+          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down">
       <p>
         <%= comment.content %><br>
-        <span><%= comment.vote_sum %></span>
+        <span><%= comment.vote_total %></span>
         <span><%= comment.commenter.username %></span>
         <span><%= comment.created_at %></span>
       </p>
@@ -34,7 +41,10 @@
     <p>
       <h3>Answer:<%= answer.id %></h3>
       <%= answer.description %><br>
-      <span><%= answer.vote_sum %></span>
+      <form action='/answers/<%= answer.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
+    </form>
+    <form action='/answers/<%= answer.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
+      <span><%= answer.vote_total %></span>
       <span><%= answer.answerer.username %></span>
       <span><%= answer.created_at %></span>
     </p>
@@ -45,9 +55,10 @@
     <% answer.comments.each do |comment| %>
     <ul>
       <li>
-        <p>
+        <p><form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
+          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
           <%= comment.content %> <br>
-          <span><%= comment.vote_sum %></span>
+          <span><%= comment.vote_total %></span>
           <span><%= comment.commenter.username %></span>
           <span><%= comment.created_at %></span>
         </p>
@@ -56,5 +67,6 @@
     <% end %>
   <% end %>
 </div>
+
 
 

@@ -42,6 +42,9 @@ end
 get '/users/:id' do
   @user = User.find(params[:id])
   @total_votes = @user.total_votes
+  @questions = @user.questions
+  @answers = @user.answers
+  @comments = @user.comments
   erb :"users/show"
 end
 
