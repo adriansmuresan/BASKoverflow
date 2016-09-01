@@ -10,7 +10,7 @@ $(document).ready(function() {
      data: { value: 1}
    })
    .done(function(response) {
-      $this.parent().parent().find('#vote').text(response)
+      $this.parent().parent().find('.vote').text(response)
       $('.downvote-button').removeClass('red')
       $this.addClass('green')
    })
@@ -33,7 +33,7 @@ $(document).ready(function() {
     })
 
    .done(function(response) {
-      $this.parent().parent().find('#vote').text(response)
+      $this.parent().parent().find('.vote').text(response)
       $('.upvote-button').removeClass('green')
       $this.addClass('red')
    })

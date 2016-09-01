@@ -7,7 +7,7 @@
     <form action='/questions/<%= @question.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
     </form>
     <form action='/questions/<%= @question.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
-    <span><%= @question.vote_total %></span>
+    <span class="vote"><%= @question.vote_total %></span>
     <span><%= @question.author.username %></span>
     <span><%= @question.created_at %></span>
   </p>
