@@ -23,7 +23,7 @@ $(document).ready(function() {
 
   })
 
-  $('div').on("click", '.downvote-button' function(event) {
+  $('div').on("click", '.downvote-button', function(event) {
   event.preventDefault();
     $this = $(this)
     url = $this.parent().attr('action')

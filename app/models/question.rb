@@ -4,6 +4,9 @@ class Question < ActiveRecord::Base
   has_many :answers
   has_many :comments, as: :commentable
 
+  validates_presence_of :title
+  validates_uniqueness_of :title
+
 
   def vote_total
     self.votes.sum(:value)

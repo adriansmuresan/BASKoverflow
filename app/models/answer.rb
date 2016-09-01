@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
   has_many :votes, as: :votable
   has_many :comments, as: :commentable
 
+  validates_presence_of :description
 
   def vote_total
     self.votes.sum(:value)

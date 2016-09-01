@@ -40,11 +40,13 @@ get '/users/logout' do
 end
 
 get '/users/:id' do
+if logged_in?
   @user = User.find(params[:id])
   @total_votes = @user.total_votes
   @questions = @user.questions
   @answers = @user.answers
   @comments = @user.comments
   erb :"users/show"
+end
 end
 
