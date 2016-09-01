@@ -1,55 +1,71 @@
 <h1><%= @question.title %></h1>
 
-<div>
-  <p><%= @question.body %></p>
-  <form action='/questions/<%= @question.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
+
+<div class='question'>
+  <h2>Question:</h2>
+  <p><%= @question.body %> <br>
+    <form action='/questions/<%= @question.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
     </form>
     <form action='/questions/<%= @question.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
-  <span><%= @question.vote_total %></span>
-  <span><%= @question.author.username %></span>
-  <span><%= @question.created_at %></span>
-</div>
-<h4>Comments for questions:</h4>
-<div>
-  <% @question.comments.each do |comment| %>
-  <ul>
-    <li><form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
-          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down">
-      <%= comment.content %><br>
-      <span> <%= comment.vote_total %></span>
-      <span><%= comment.commenter.username %></span>
-      <span><%= comment.created_at %></span>
-    </li>
-  </ul>
-  <% end %>
+    <span><%= @question.vote_total %></span>
+    <span><%= @question.author.username %></span>
+    <span><%= @question.created_at %></span>
+  </p>
+<%= erb :"/answers/_new", :layout => false %>
+
 </div>
 
-<div>
-  <h2>Answers:</h2>
+<div class='question_comments'>
+  <h2>Question Comments:</h2>
+  <% path = "/questions/#{@question.id}/comments" %>
+  <%= erb :"/comments/_new", layout: false, locals: { path: path } %>
   <ul>
-    <% @question.answers.each do |answer| %>
-    <li><form action='/answers/<%= answer.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
+
+  <% @question.comments.each do |comment| %>
+    <li><form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
+          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down">
+      <p>
+        <%= comment.content %><br>
+        <span><%= comment.vote_total %></span>
+        <span><%= comment.commenter.username %></span>
+        <span><%= comment.created_at %></span>
+      </p>
+    </li>
+  <% end %>
+  </ul>
+</div>
+
+
+<div class='answers'>
+  <% @question.answers.each do |answer| %>
+    <p>
+      <h3>Answer:<%= answer.id %></h3>
+      <%= answer.description %><br>
+      <form action='/answers/<%= answer.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up">
     </form>
     <form action='/answers/<%= answer.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
-      <%= answer.description %><br>
       <span><%= answer.vote_total %></span>
       <span><%= answer.answerer.username %></span>
       <span><%= answer.created_at %></span>
-      </li>
-  </ul>
-      <p>
-        <h3>Comments for answer:</h3>
-        <ul>
-          <% answer.comments.each do |comment| %>
-          <li><form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
-          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form><%= comment.content %></li>
+    </p>
+    <% path = "/questions/#{@question.id}/answers/#{ answer.id }/comments" %>
+    <%= erb :"/comments/_new", layout: false, locals: { path: path } %>
+
+    <h4>Comments for this  answer <%= answer.id %>:</h4>
+    <% answer.comments.each do |comment| %>
+    <ul>
+      <li>
+        <p><form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
+          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
+          <%= comment.content %> <br>
           <span><%= comment.vote_total %></span>
           <span><%= comment.commenter.username %></span>
           <span><%= comment.created_at %></span>
-        </ul>
-        <% end %>
-        <% end %>
-      </p>
+        </p>
+      </li>
+    </ul>
+    <% end %>
+  <% end %>
 </div>
 
 
