@@ -1,3 +1,69 @@
+* {
+  font-family: 'VT323', monospace;
+  font-size: 25px;
+}
+
+body {
+  position: relative;
+}
+
+body:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('http://www.nauzethdez.com/content/images/2016/02/thegamesdb-min.jpg');
+    width: 100%;
+    height: 100%;
+    opacity : 0.8;
+    z-index: -1;
+}
+
+h1 {
+  font-family: 'Bungee Shade', cursive;
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+
+nav {
+  display: inline-block;
+  width: 100%;
+  margin-left: -25px;
+}
+nav li {
+  list-style: none;
+  float: left;
+  padding-right: 10px;
+}
+
+nav li a {
+  text-decoration: none;
+}
+
+#box {
+  margin-top: 20px;
+  background-image: url('http://border-town.com/public/images/posts/2015/mario-sprite-compare.png');
+  background-size: 86px 100%;
+  height: 50px;
+  -webkit-animation: backgroundScroll 5s linear infinite;
+  animation: backgroundScroll 5s linear infinite;
+}
+
+@-webkit-keyframes backgroundScroll {
+from {background-position: 0 0;}
+to {background-position: 400px 0;}
+}
+
+@keyframes backgroundScroll {
+from {background-position: 0 0;}
+to {background-position: 400px 0;}
+}
+
+.alert {
+  color: red;
+}
+
 .green {
   background-color: green;
   color: white;
@@ -9,9 +75,35 @@
 }
 
 #bad-user {
+  border: solid 100px transparent;
+  border-image: url('http://rlv.zcache.com.au/gaudy_bright_rainbow_elephant_pattern_square_sticker-r763e5af047d1438dbeebdca0795a31b8_v9wf3_8byvr_324.jpg') 25% repeat;
+  cursor: no-drop;
   background-color:  #996600;
   color: white;
 }
+
+#gameover {
+  font-family: 'Nosifer', cursive;
+  font-size: 100px;
+  color: red;
+  position:relative;
+  animation:mymove 3s ease-out forwards;
+  animation-iteration-count: 100;
+  -webkit-animation:mymove 4s;
+  -webkit-animation-iteration-count:100;
+}
+
+  @keyframes mymove
+  { from {top:0px;}
+  to {top:400px;}
+  }
+
+  @-webkit-keyframes mymove
+  {
+  from {top:0px;}
+  to {top:400px;}
+  }
+
 #good-user {
   background-color: #e6ffe6;
   height: 750px;
@@ -21,3 +113,10 @@
   background-color: lightgray;
   height: 750px;
 }
+
+#page-wrapper {
+     width: 900px;
+     margin: 0 auto;
+}
+
+

@@ -45,7 +45,7 @@ end
   User.create({
     username: Faker::Name.name,
     email: Faker::Internet.email,
-    hashed_password: 'password'
+    password: 'password123'
     })
 end
 

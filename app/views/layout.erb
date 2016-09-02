@@ -14,14 +14,18 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="/js/application.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Nosifer|VT323" rel="stylesheet">
+
 
   <title>Game Over Yo</title>
 </head>
 <body>
+  <div id="page-wrapper">
   <header>
+      <h1>Game Over Yo!</h1>
     <nav>
       <ul>
-          <li><a href="/questions">HOME</a></li>
+          <li><a href="/questions">Home</a></li>
         <% if logged_in? %>
           <li><a href="/users/<%= current_user.id %>"> <%= current_user.username.capitalize %>'s Profile</a></li>
           <li><a href="/users/logout">Logout</a></li>
@@ -30,7 +34,10 @@
           <li><a href="/users/new">Register</a></li>
         <% end %>
       </ul>
+    </nav>
+    <div id="box"></div>
 
   <%= yield %>
+</div>
 </body>
 </html>

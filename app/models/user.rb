@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  before_destroy :destroy_all_records
+
   has_many :questions, foreign_key: :author_id
   has_many :answers, foreign_key: :answerer_id
   has_many :comments, foreign_key: :commenter_id
@@ -18,7 +20,7 @@ class User < ActiveRecord::Base
     self.hashed_password = @password
   end
 
-  def self.authenticate(email, password)
+  def authenticate?(email, password)
     user = User.find_by(email: email)
     user != nil ? user.password == password : false
   end
@@ -41,6 +43,14 @@ class User < ActiveRecord::Base
     if @plaintext_pass.length < 8
       errors.add(:password, "must be at least 8 characters")
     end
+  end
+
+  private
+  def destroy_all_records
+    self.questions.destroy_all
+    self.comments.destroy_all
+    self.answers.destroy_all
+    self.votes.destroy_all
   end
 
 end
