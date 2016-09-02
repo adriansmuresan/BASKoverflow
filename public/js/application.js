@@ -71,9 +71,27 @@ $(document).ready(function() {
       data: $form.serialize()
     })
     .done(function(response){
-    console.log(response);
       $('.answers').append(response);
     });
   });
+
+  $('#new-comment-form form').on('submit', function(){
+    event.preventDefault();
+    $form = $(this);
+
+    $.ajax({
+      type: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
+    .done(function(response){
+      $form.
+    console.log($form);
+    $form.closest('.div-comments').find('.list-comments').append(response);
+
+    });
+  });
+
+
 
 });

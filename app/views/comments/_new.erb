@@ -1,6 +1,6 @@
 <% if logged_in? %>
-<div>
-  <form method="POST" action="<%= path %>">
+<div id="new-comment-form">
+  <form method="POST" action="<%= path %>" name=''>
     <h4>Post your comment here:</h4>
     Content: <input type="text" name="content" placeholder="Content"><br><br>
     <input type="submit" value="Post Comment">

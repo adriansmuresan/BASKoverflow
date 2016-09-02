@@ -1,0 +1,19 @@
+        <li>
+          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
+            <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
+            <%= comment.content %> <br>
+            <span class="vote"><%= comment.vote_total %></span>
+            <span><%= comment.commenter.username %></span>
+            <span><%= comment.created_at %></span>
+
+            <div class='revise_comment'>
+              <% if logged_in? %>
+                <a href="/questions/<%= question_id %>/comments/<%= comment.id %>/edit">Edit</a>
+                <form method="POST" action="/comments/<%= comment.id %>">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="submit" value="Delete">
+                </form>
+              <% end %>
+            </div>
+            
+        </li>

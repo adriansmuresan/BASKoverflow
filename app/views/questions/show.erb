@@ -31,64 +31,30 @@
   </div>
 </div>
 
-<div class='question_comments'>
+<div class='div-comments'>
   <h2>Question Comments:</h2>
   <% path = "/questions/#{@question.id}/comments" %>
   <%= erb :"/comments/_new", layout: false, locals: { path: path } %>
 
-  <ul>
+  <ul class="list-comments">
     <% @question.comments.each do |comment| %>
-      <li>
-        <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
-        <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
-        <%= comment.content %><br>
-        <span class="vote"><%= comment.vote_total %></span>
-        <span><%= comment.commenter.username %></span>
-        <span><%= comment.created_at %></span>
-
-        <div class='revise_comment'>
-          <% if logged_in? %>
-            <a href="/questions/<%= @question.id %>/comments/<%= comment.id %>/edit">Edit</a>
-            <form method="POST" action="/comments/<%= comment.id %>">
-              <input type="hidden" name="_method" value="DELETE">
-              <input type="submit" value="Delete">
-            </form>
-          <% end %>
-        </div>
-
-      </li>
+      <%= erb :"/comments/_index", layout: false, locals: {comment: comment, question_id: @question.id} %>
+      </div>
     <% end %>
   </ul>
 </div>
 
 
-<div class='answers'>
+<div class='div-comments answers'>
   <% @question.answers.each do |answer| %>
     <%= erb :"/answers/_index", layout: false, locals: {answer: answer} %>
 
 
     <h4>Comments for this  answer <%= answer.id %>:</h4>
-    <ul>
+    <ul class="list-comments">
       <% answer.comments.each do |comment| %>
-        <li>
-          <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
-            <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
-            <%= comment.content %> <br>
-            <span class="vote"><%= comment.vote_total %></span>
-            <span><%= comment.commenter.username %></span>
-            <span><%= comment.created_at %></span>
-
-            <div class='revise_comment'>
-              <% if logged_in? %>
-                <a href="/questions/<%= @question.id %>/comments/<%= comment.id %>/edit">Edit</a>
-                <form method="POST" action="/comments/<%= comment.id %>">
-                  <input type="hidden" name="_method" value="DELETE">
-                  <input type="submit" value="Delete">
-                </form>
-              <% end %>
-            </div>
-
-        </li>
+        <%= erb :"/comments/_index", layout: false, locals: {comment: comment, question_id: @question.id} %>
+        </div>
       <% end %>
     </ul>
   <% end %>
