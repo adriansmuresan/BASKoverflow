@@ -12,20 +12,9 @@
 <% end %>
 <%= erb :"/questions/_new", :layout => false %>
 <div id="text-container">
-<% @questions.each do |question| %>
-<ul>
-  <li> <% if logged_in? %>
-    <form action='/questions/<%= question.id %>/votes' method='POST'><input name="upvote" type='submit' class="upvote-button" value="Up">
-    </form>
-    <form action='/questions/<%= question.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
-      <% end %>
-
-    <a href="/questions/<%= question.id %>"><%= question.title %></a><br>
-
-    <span class="vote"><%= question.vote_total%></span>
-    <span><%= question.author.username %></span>
-    <span><%= question.created_at %></span>
-  </li>
-</ul>
-<% end %>
+  <ul>
+    <% @questions.each do |question| %>
+      <%= erb :"/questions/_homepage-index", layout: false, locals: {question: question} %>
+    <% end %>
+  </ul>
 </div>

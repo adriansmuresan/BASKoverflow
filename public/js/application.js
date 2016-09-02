@@ -45,4 +45,35 @@ $(document).ready(function() {
      alert("error");
    })
   })
+
+
+  $('#new-question-container form').on('submit', function(event){
+    event.preventDefault();
+    $form = $(this);
+
+    $.ajax({
+      type: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
+    .done(function(response){
+      $('#text-container ul').append(response);
+    });
+  });
+
+  $('#new-answer-form form').on('submit', function(){
+    event.preventDefault();
+    $form = $(this);
+
+    $.ajax({
+      type: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
+    .done(function(response){
+    console.log(response);
+      $('.answers').append(response);
+    });
+  });
+
 });
