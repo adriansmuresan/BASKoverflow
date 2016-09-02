@@ -4,7 +4,11 @@ post '/questions/:id/answers' do
     new_answer.answerer_id = session[:user_id]
     new_answer.question_id = params[:id]
     if new_answer.save
-      redirect :"/questions/#{new_answer.question_id}"
+      if request.xhr?
+        erb :"/answers/_index", layout: false, locals: {answer: new_answer}
+      else
+        redirect :"/questions/#{new_answer.question_id}"
+      end
     else
       @errors = new_answer.errors.full_messages
       erb :'/questions/index'

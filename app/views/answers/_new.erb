@@ -1,5 +1,5 @@
 <% if logged_in? %>
-<div>
+<div id='new-answer-form'>
   <form method="POST" action="/questions/<%= @question.id %>/answers">
     <h4>Post your answer here:</h4>
     Content:<input type="text" name="description" placeholder="Content"><br><br>

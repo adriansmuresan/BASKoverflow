@@ -1,23 +1,33 @@
 
 post '/questions/:id/comments' do
   if logged_in?
-    @comment = Comment.new({content: params[:content], commentable_id: params[:id], commentable_type: 'Question', commenter_id: session[:user_id]})
-    if @comment.save
-      redirect back
+    comment = Comment.new({content: params[:content], commentable_id: params[:id], commentable_type: 'Question', commenter_id: session[:user_id]})
+    if comment.save
+      if request.xhr?
+        erb :'/comments/_index', layout: false, locals: {comment: comment, question_id: params[:id]}
+      else
+        redirect back
+      end
     else
-      @errors = @comment.errors.full_messages
+      @errors = comment.errors.full_messages
       erb :"/questions/show"
     end
  end
 end
 
-post '/answers/:answer_id/comments' do
+post '/answers/:id/comments' do
   if logged_in?
-    @comment = Comment.new({content: params[:content], commentable_id: params[:answer_id], commentable_type: 'Answer', commenter_id: session[:user_id]})
-    if @comment.save
-      redirect back
+    current_question_id = Answer.find(params[:id]).question_id
+    comment = Comment.new({content: params[:content], commentable_id: params[:id], commentable_type: 'Answer', commenter_id: session[:user_id]})
+    if comment.save
+      if request.xhr?
+        p 'made it hererer-------------------------------------------------------'
+        erb :'/comments/_index', layout: false, locals: {comment: comment, question_id: current_question_id}
+      else
+        redirect back
+      end
     else
-      @errors = @comment.errors.full_messages
+      @errors = comment.errors.full_messages
       erb :"/questions/show"
     end
   end
