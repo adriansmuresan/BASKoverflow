@@ -15,7 +15,7 @@ post '/questions' do
       new_question.author_id = session[:user_id]  
     if new_question.save
         if request.xhr?
-          erb :"/questions/_homepage-question", layout: false, locals: {question: new_question}
+          erb :"/questions/_homepage-index", layout: false, locals: {question: new_question}
         else
           redirect :"/questions/#{new_question.id}"
         end

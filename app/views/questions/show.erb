@@ -36,8 +36,8 @@
   <% path = "/questions/#{@question.id}/comments" %>
   <%= erb :"/comments/_new", layout: false, locals: { path: path } %>
 
-  <% @question.comments.each do |comment| %>
-    <ul>
+  <ul>
+    <% @question.comments.each do |comment| %>
       <li>
         <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
         <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
@@ -57,43 +57,19 @@
         </div>
 
       </li>
-    </ul>
-  <% end %>
+    <% end %>
+  </ul>
 </div>
 
 
 <div class='answers'>
   <% @question.answers.each do |answer| %>
-      <h3>Answer:<%= answer.id %></h3>
-      <p><%= answer.description %></p>
-      <p>
-        <ul><li>
-        <form action='/answers/<%= answer.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
-        <form action='/answers/<%= answer.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
-        <span class='vote'><%= answer.vote_total %></span>
-        <span><%= answer.answerer.username %></span>
-        <span><%= answer.created_at %></span></li>
-        </ul>
+    <%= erb :"/answers/_index", layout: false, locals: {answer: answer} %>
 
-        <div class='revise_answer'>
-          <% if logged_in? %>
-            <div>
-              <a href="/answers/<%= answer.id %>/edit">Edit</a>
-              <form method="POST" action="/answers/<%= answer.id %>">
-                <input type="hidden" name="_method" value="DELETE">
-                <input type="submit" value="Delete">
-              </form>
-            </div>
-          <% end %>
-        </div>
-
-      </p>
-    <% path = "/answers/#{ answer.id }/comments" %>
-    <%= erb :"/comments/_new", layout: false, locals: { path: path } %>
 
     <h4>Comments for this  answer <%= answer.id %>:</h4>
-    <% answer.comments.each do |comment| %>
-      <ul>
+    <ul>
+      <% answer.comments.each do |comment| %>
         <li>
           <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="upvote" type='submit' class = "upvote-button" value="Up"></form>
             <form action='/comments/<%= comment.id %>/votes' method='POST'><input name="downvote" type='submit' class = "downvote-button" value="Down"></form>
@@ -113,8 +89,8 @@
             </div>
 
         </li>
-      </ul>
-    <% end %>
+      <% end %>
+    </ul>
   <% end %>
 </div>
 

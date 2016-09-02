@@ -14,7 +14,7 @@
 <div id="text-container">
   <ul>
     <% @questions.each do |question| %>
-      <%= erb :"/questions/_homepage-question", layout: false, locals: {question: question} %>
+      <%= erb :"/questions/_homepage-index", layout: false, locals: {question: question} %>
     <% end %>
   </ul>
 </div>
