@@ -4,20 +4,9 @@
 }
 
 body {
-  position: relative;
-}
-
-body:after {
-    content : "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-image: url('http://www.nauzethdez.com/content/images/2016/02/thegamesdb-min.jpg');
-    width: 100%;
-    height: 100%;
-    opacity : 0.8;
-    z-index: -1;
+  background-image: url('http://www.nauzethdez.com/content/images/2016/02/thegamesdb-min.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 h1 {
