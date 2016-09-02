@@ -47,6 +47,20 @@ $(document).ready(function() {
   })
 
 
-  $
+  $('#new-question-container form').on('submit', function(event){
+    event.preventDefault();
+    $form = $(this);
+      // $('#text-container').css('background-color', 'red');
 
+    $.ajax({
+      type: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    })
+    .done(function(response){
+      console.log(response);
+      $('#text-container ul').append(response);
+    });
+
+  });
 });

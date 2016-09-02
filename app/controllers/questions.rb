@@ -11,10 +11,14 @@ end
 
 post '/questions' do
   if logged_in?
-    new_question = Question.new(params[:new_question])
-    new_question.author_id = session[:user_id]
+      new_question = Question.new(params[:new_question])
+      new_question.author_id = session[:user_id]  
     if new_question.save
-      redirect :"/questions/#{new_question.id}"
+        if request.xhr?
+          erb :"/questions/_homepage-question", layout: false, locals: {question: new_question}
+        else
+          redirect :"/questions/#{new_question.id}"
+        end
     else
       @errors = new_question.errors.full_messages
       erb :'/questions/index'
